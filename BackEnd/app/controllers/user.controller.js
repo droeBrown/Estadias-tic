@@ -1,0 +1,84 @@
+"use strict";
+
+//se importa el modelo
+const User = require("../models/user.model");
+
+//se crean las rutas
+
+//crear
+exports.create = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "No puede estar vacio"
+    });
+  }
+
+  // Create a user
+  const user = new User({
+    usuario: req.body.usuario,
+    contraseña: req.body.contraseña,
+    tipo: req.body.tipo
+  });
+
+  // Save user in the database
+  User.create(user, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Ha ocurrido un error al crear el usuario."
+      });
+    else res.send(data);
+  });
+};
+
+//Consultar todos los usuarios
+exports.findAll = (req, res) => {
+  User.getAll((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Ha ocurrido un error al consulltar los usuario."
+      });
+    else res.send(data);
+  });
+};
+
+exports.update = (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "No puede estar vacio"
+    });
+  }
+
+  User.updateById(req.params.id, new User(req.body), (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `No se encontro el usuario con el id: ${req.params.id}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error al actualizar"
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+// Delete a Customer with the specified customerId in the request
+exports.delete = (req, res) => {
+  User.remove(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `No se pudo encontrar el usuario con el id: ${req.params.id}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "No se pudo borrar el usuario con el id:" + req.params.id
+        });
+      }
+    } else res.send({ message: `Usuario Borrado` });
+  });
+};
