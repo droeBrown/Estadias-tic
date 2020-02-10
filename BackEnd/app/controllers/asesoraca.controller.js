@@ -1,11 +1,9 @@
 "use strict";
 
 //import the model
-const User = require("../models/user.model");
+const AsesorAca = require("../models/asesorAca.model");
 
-//create the routes
-
-//create user
+//create
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -14,36 +12,39 @@ exports.create = (req, res) => {
     });
   }
 
-  // Create a user
-  const user = new User({
-    usuario: req.body.usuario,
-    contraseña: req.body.contraseña,
-    tipo: req.body.tipo,
+  // Create asesorAca
+  const asesorAca = new AsesorAca({
+    nombre: req.body.nombre,
+    correo: req.body.correo,
+    telefono: req.body.telefono,
+    carrera: req.body.carrera,
+    turno: req.body.turno,
     estatus: req.body.estatus
   });
 
-  // Save user in the database
-  User.create(user, (err, data) => {
+  // Save enterprise in the database
+  AsesorAca.create(asesorAca, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Ha ocurrido un error al crear el usuario."
+        message: err.message || "Ha ocurrido un error al crear el Asesor Academico."
       });
     else res.send(data);
   });
 };
 
-//Read all the users
+
+//Read all the asesors
 exports.findAll = (req, res) => {
-  User.getAll((err, data) => {
+  AsesorAca.getAll((err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Ha ocurrido un error al consulltar los usuarios."
+        message: err.message || "Ha ocurrido un error al consultar los Asesores."
       });
     else res.send(data);
   });
 };
 
-//update user
+//update asesor
 exports.update = (req, res) => {
   // Validate Request
   if (!req.body) {
@@ -52,11 +53,11 @@ exports.update = (req, res) => {
     });
   }
 
-  User.updateById(req.params.id, new User(req.body), (err, data) => {
+  AsesorAca.updateById(req.params.id, new AsesorAca(req.body), (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `No se encontro el usuario con el id: ${req.params.id}.`
+          message: `No se encontro el Asesor con el id: ${req.params.id}.`
         });
       } else {
         res.status(500).send({
@@ -67,21 +68,22 @@ exports.update = (req, res) => {
   });
 };
 
-// Delete a user with the specified id in the request
+
+// Delete a enterprise with the specified id in the request
 exports.delete = (req, res) => {
-  User.remove(req.params.id, (err, data) => {
+  AsesorAca.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `No se pudo encontrar el usuario con el id: ${req.params.id}.`
+          message: `No se pudo encontrar el asesorcon el id: ${req.params.id}.`
         });
       } else {
         res.status(500).send({
-          message: "No se pudo borrar el usuario con el id:" + req.params.id
+          message: "No se pudo borrar el asesor con el id:" + req.params.id
         });
       }
     } else res.send({
-      message: `Usuario Borrado`
+      message: `Asesor Borrado`
     });
   });
 };

@@ -1,11 +1,11 @@
 "use strict";
 
 //import the model
-const User = require("../models/user.model");
+const Area = require("../models/area.model");
 
 //create the routes
 
-//create user
+//create Area
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -14,30 +14,28 @@ exports.create = (req, res) => {
     });
   }
 
-  // Create a user
-  const user = new User({
-    usuario: req.body.usuario,
-    contraseña: req.body.contraseña,
-    tipo: req.body.tipo,
-    estatus: req.body.estatus
+  // Create an area
+  const area = new Area({
+    nombre: req.body.nombre,
+    id_empresa: req.body.id_empresa
   });
 
   // Save user in the database
-  User.create(user, (err, data) => {
+  Area.create(area, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Ha ocurrido un error al crear el usuario."
+        message: err.message || "Ha ocurrido un error al crear el Area."
       });
     else res.send(data);
   });
 };
 
-//Read all the users
+//Read all the areas
 exports.findAll = (req, res) => {
-  User.getAll((err, data) => {
+  Area.getAll((err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Ha ocurrido un error al consulltar los usuarios."
+        message: err.message || "Ha ocurrido un error al consultar las Areas."
       });
     else res.send(data);
   });
@@ -52,11 +50,11 @@ exports.update = (req, res) => {
     });
   }
 
-  User.updateById(req.params.id, new User(req.body), (err, data) => {
+  Area.updateById(req.params.id, new Area(req.body), (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `No se encontro el usuario con el id: ${req.params.id}.`
+          message: `No se encontro el area con el id: ${req.params.id}.`
         });
       } else {
         res.status(500).send({
@@ -69,19 +67,19 @@ exports.update = (req, res) => {
 
 // Delete a user with the specified id in the request
 exports.delete = (req, res) => {
-  User.remove(req.params.id, (err, data) => {
+  Area.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `No se pudo encontrar el usuario con el id: ${req.params.id}.`
+          message: `No se pudo encontrar el area con el id: ${req.params.id}.`
         });
       } else {
         res.status(500).send({
-          message: "No se pudo borrar el usuario con el id:" + req.params.id
+          message: "No se pudo borrar el area con el id:" + req.params.id
         });
       }
     } else res.send({
-      message: `Usuario Borrado`
+      message: `Area Borrada`
     });
   });
 };

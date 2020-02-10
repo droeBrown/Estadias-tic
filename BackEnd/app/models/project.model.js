@@ -3,53 +3,55 @@
 const sql = require("./db.model.js");
 
 // constructor
-const User = function (params) {
-  //se crea el modelo de usuario
-  this.usuario = params.usuario;
-  this.contraseña = params.contraseña;
-  this.tipo = params.tipo;
+const Project = function (params) {
+  //se crea el modelo de proyecto
+  this.nombre = params.nombre;
+  this.responsable = params.responsable;
+  this.calificacion = params.calificacion;
+  this.comentarios = params.comentarios;
   this.estatus = params.estatus;
+  this.id_area = params.id_area;
 };
 
 ///Crear
-User.create = (newUser, result) => {
-  sql.query("INSERT INTO Usuario SET ?", newUser, (err, res) => {
+Project.create = (newProject, result) => {
+  sql.query("INSERT INTO Proyecto SET ?", newProject, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
-
-    console.log("created user: ", {
+    console.log("created enterprise: ", {
       id: res.insertId,
-      ...newUser
+      ...newProject
     });
     result(null, {
       id: res.insertId,
-      ...newUser
+      ...newProject
     });
   });
 };
 
 //CONSULTAR
-User.getAll = result => {
-  sql.query("SELECT * FROM Usuario", (err, res) => {
+Project.getAll = result => {
+  sql.query("SELECT * FROM Proyecto", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("Usuarios: ", res);
+    console.log("Proyectos: ", res);
     result(null, res);
   });
 };
 
+
 //Actualizar
-User.updateById = (id, user, result) => {
+Project.updateById = (id, project, result) => {
   sql.query(
-    "UPDATE Usuario SET usuario = ?, contraseña = ?, tipo = ? , estatus= ? WHERE id = ?",
-    [user.usuario, user.contraseña, user.tipo, user.estatus, id],
+    "UPDATE Proyecto SET nombre = ?, responsable = ?, calificacion= ?, comentarios= ?, estatus= ?,id_area= ? WHERE id_proyecto = ?",
+    [project.nombre, project.responsable, project.calificacion, project.comentarios, project.estatus, project.id_area, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -65,21 +67,21 @@ User.updateById = (id, user, result) => {
         return;
       }
 
-      console.log("updated user: ", {
+      console.log("updated project: ", {
         id: id,
-        ...user
+        ...project
       });
       result(null, {
         id: id,
-        ...user
+        ...project
       });
     }
   );
 };
 
 //Borar
-User.remove = (id, result) => {
-  sql.query("DELETE FROM Usuario WHERE id = ?", id, (err, res) => {
+Project.remove = (id, result) => {
+  sql.query("DELETE FROM Proyecto WHERE id_proyecto = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -94,9 +96,10 @@ User.remove = (id, result) => {
       return;
     }
 
-    console.log("Usuario borrado con el id: ", id);
+    console.log("Proyecto borrado con el id: ", id);
     result(null, res);
   });
 };
+
 //se exporta el módulo
-module.exports = User;
+module.exports = Project;

@@ -2,54 +2,52 @@
 //se obtiene la conexión a la bd
 const sql = require("./db.model.js");
 
-// constructor
-const User = function (params) {
-  //se crea el modelo de usuario
-  this.usuario = params.usuario;
-  this.contraseña = params.contraseña;
-  this.tipo = params.tipo;
-  this.estatus = params.estatus;
-};
+//crete the constructor
 
-///Crear
-User.create = (newUser, result) => {
-  sql.query("INSERT INTO Usuario SET ?", newUser, (err, res) => {
+const Area = function (params) {
+  //se crear el modelo de area
+  this.nombre = params.nombre;
+  this.id_empresa = params.id_empresa;
+}
+
+//crear
+Area.create = (newArea, result) => {
+  sql.query("INSERT INTO Area SET ?", newArea, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
-
-    console.log("created user: ", {
+    console.log("created Area: ", {
       id: res.insertId,
-      ...newUser
+      ...newArea
     });
     result(null, {
       id: res.insertId,
-      ...newUser
+      ...newArea
     });
   });
 };
 
 //CONSULTAR
-User.getAll = result => {
-  sql.query("SELECT * FROM Usuario", (err, res) => {
+Area.getAll = result => {
+  sql.query("SELECT * FROM Area", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("Usuarios: ", res);
+    console.log("Areas: ", res);
     result(null, res);
   });
 };
 
 //Actualizar
-User.updateById = (id, user, result) => {
+Area.updateById = (id, area, result) => {
   sql.query(
-    "UPDATE Usuario SET usuario = ?, contraseña = ?, tipo = ? , estatus= ? WHERE id = ?",
-    [user.usuario, user.contraseña, user.tipo, user.estatus, id],
+    "UPDATE Area SET nombre = ?, id_empresa= ?WHERE id_area = ?",
+    [area.nombre, area.id_empresa, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -65,21 +63,21 @@ User.updateById = (id, user, result) => {
         return;
       }
 
-      console.log("updated user: ", {
+      console.log("updated Area : ", {
         id: id,
-        ...user
+        ...area
       });
       result(null, {
         id: id,
-        ...user
+        ...area
       });
     }
   );
 };
 
 //Borar
-User.remove = (id, result) => {
-  sql.query("DELETE FROM Usuario WHERE id = ?", id, (err, res) => {
+Area.remove = (id, result) => {
+  sql.query("DELETE FROM Area WHERE id_area = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -94,9 +92,11 @@ User.remove = (id, result) => {
       return;
     }
 
-    console.log("Usuario borrado con el id: ", id);
+    console.log("Area borrada con el id: ", id);
     result(null, res);
   });
 };
+
+
 //se exporta el módulo
-module.exports = User;
+module.exports = Area;
