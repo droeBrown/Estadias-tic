@@ -53,7 +53,7 @@ h1 {
 #login input[type="text"]:hover,
 #login input[type="password"]:hover {
   transform: scale(1.05);
-  background-color: rgb(216, 216, 216);
+  background-color: rgba(216, 216, 216);
 }
 
 #login input[type="submit"] {
@@ -84,7 +84,7 @@ h1 {
   float: left;
   height: 100%;
   width: 38%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 10);
 }
 
 #aniver {
@@ -92,6 +92,11 @@ h1 {
   height: 200px;
   margin: 0px auto;
   margin-top: 30px;
+  transition: all 600ms;
+}
+
+#aniver:hover {
+  transform: rotatey(190deg);
 }
 
 #logo {
