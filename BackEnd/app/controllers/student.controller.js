@@ -47,7 +47,18 @@ exports.findAll = (req, res) => {
   Student.getAll((err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Ha ocurrido un error al consulltar los Alumnos."
+        message: err.message || "Ha ocurrido un error al consultar los Alumnos."
+      });
+    else res.send(data);
+  });
+};
+
+//Read one  student
+exports.findOne = (req, res) => {
+  Student.getOne(req.params.id, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Ha ocurrido un error al consultar el Alumno."
       });
     else res.send(data);
   });

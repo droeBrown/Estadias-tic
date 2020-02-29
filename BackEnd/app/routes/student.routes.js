@@ -5,6 +5,8 @@ module.exports = app => {
   app.post("/save-student", Student.create);
   //get All students
   app.get("/students", Student.findAll);
+  //get One student
+  app.get("/student/:id", Student.findOne);
   //update student
   app.put("/update-student/:id", Student.update);
   //delete student

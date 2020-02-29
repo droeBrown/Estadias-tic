@@ -56,6 +56,21 @@ Student.getAll = result => {
   });
 };
 
+//CONSULTAR POR ID
+Student.getOne = (id, result) => {
+  sql.query("SELECT * FROM Alumno WHERE id_alumno=?", id, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("Alumnos: ", res);
+    result(null, res);
+  });
+};
+
+
 //Actualizar
 Student.updateById = (id, student, result) => {
   sql.query(

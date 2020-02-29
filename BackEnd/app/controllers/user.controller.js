@@ -43,6 +43,17 @@ exports.findAll = (req, res) => {
   });
 };
 
+//Read by user and pass 
+exports.findOne = (req, res) => {
+  User.getOne(req.params.usuario, req.params.contraseña, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Ha ocurrido un error al consulltar los usuarios."
+      });
+    else res.send(data);
+  });
+};
+
 //update user
 exports.update = (req, res) => {
   // Validate Request

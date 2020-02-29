@@ -45,6 +45,21 @@ User.getAll = result => {
   });
 };
 
+//CONSULTAR by user and pass
+User.getOne = (user, pass, result) => {
+  sql.query("SELECT * FROM Usuario WHERE usuario=? AND contraseña=?", user, pass, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("Usuarios: ", res);
+    result(null, res);
+  });
+};
+
+
 //Actualizar
 User.updateById = (id, user, result) => {
   sql.query(
