@@ -5,11 +5,18 @@ const sql = require("./db.model.js");
 // constructor
 const Student = function (params) {
   //se crea el modelo de Alumno
-  this.nombre = params.nombre;
-  this.numseguro = params.numseguro;
-  this.nivel = params.nivel;
+  this.nombres = params.nombres;
+  this.apellidoPaterno = params.apellidoPaterno;
+  this.apellidoMaterno = params.apellidoPaterno;
+  this.matricula = params.matricula;
+  this.periodo = params.periodo;
+  this.telefono = params.telefono;
+  this.correo = params.correo;
   this.carrera = params.carrera;
-  this.sede = params.sede;
+  this.turno = params.turno;
+  this.genero = params.genero;
+  this.edad = params.edad;
+  this.reingreso = params.reingreso;
   this.estatus = params.estatus;
   this.id_asesorin = params.id_asesorin;
   this.id_asesoraca = params.id_asesoraca;
@@ -52,8 +59,8 @@ Student.getAll = result => {
 //Actualizar
 Student.updateById = (id, student, result) => {
   sql.query(
-    "UPDATE Alumno SET nombre = ?, numseguro = ?, nivel = ?, carrera= ?, sede = ?,estatus= ?, id_asesorin = ?, id_asesoraca = ?, id_proyecto = ? WHERE id_alumno = ?",
-    [student.nombre, student.numseguro, student.nivel, student.carrera, student.sede, student.estatus, student.id_asesorin, student.id_asesoraca, student.id_proyecto, id],
+    "UPDATE Alumno SET nombres = ?, apellidoPaterno=?,apellidoMaterno = ?, matricula = ?, periodo= ?, telefono = ?,correo= ?, carrera = ?, turno = ?, genero = ?,edad=?,reingreso=?,estatus=? WHERE id_alumno = ?",
+    [student.nombres, student.apellidoPaterno, student.apellidoPaterno, student.matricula, student.periodo, student.telefono, student.correo, student.carrera, student.turno, student.genero, student.edad, student.reingreso, student.estatus, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

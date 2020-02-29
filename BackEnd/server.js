@@ -7,6 +7,9 @@ const bodyParser = require("body-parser");
 //utilización de express
 const app = express();
 
+var cors = require('cors');
+app.use(cors());
+
 // convertir las request a json
 app.use(bodyParser.json());
 
@@ -34,3 +37,4 @@ require("./app/routes/asesoraca.routes")(app);
 app.listen(3700, () => {
   console.log("Servidor funcionando en localhost:3700.");
 });
+

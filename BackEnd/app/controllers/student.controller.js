@@ -14,15 +14,22 @@ exports.create = (req, res) => {
 
   // Create a student
   const student = new Student({
-    nombre: req.body.nombre,
-    numseguro: req.body.numseguro,
-    nivel: req.body.nivel,
+    nombres: req.body.nombres,
+    apellidoPaterno: req.body.apellidoPaterno,
+    apellidoMaterno: req.body.apellidoPaterno,
+    matricula: req.body.matricula,
+    periodo: req.body.periodo,
+    telefono: req.body.telefono,
+    correo: req.body.correo,
     carrera: req.body.carrera,
-    sede: req.body.sede,
-    estatus: req.body.estatus,
-    id_asesorin: req.body.id_asesorin,
-    id_asesoraca: req.body.id_asesoraca,
-    id_proyecto: req.body.id_proyecto
+    turno: req.body.turno,
+    genero: req.body.genero,
+    edad: req.body.edad,
+    reingreso: req.body.reingreso,
+    estatus: 'activo',
+    id_asesorin: null,
+    id_asesoraca: null,
+    id_proyecto: null
   });
 
   // Save student in the database
