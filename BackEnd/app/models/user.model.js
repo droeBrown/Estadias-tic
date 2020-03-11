@@ -6,7 +6,7 @@ const sql = require("./db.model.js");
 const User = function (params) {
   //se crea el modelo de usuario
   this.usuario = params.usuario;
-  this.contraseña = params.contraseña;
+  this.contrasena = params.contrasena;
   this.tipo = params.tipo;
   this.estatus = params.estatus;
 };
@@ -47,13 +47,12 @@ User.getAll = result => {
 
 //CONSULTAR by user and pass
 User.getOne = (user, pass, result) => {
-  sql.query("SELECT * FROM Usuario WHERE usuario=? AND contraseña=?", user, pass, (err, res) => {
+  sql.query("SELECT * FROM Usuario WHERE usuario=? AND contrasena=?", [user, pass], (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
-
     console.log("Usuarios: ", res);
     result(null, res);
   });
@@ -63,8 +62,8 @@ User.getOne = (user, pass, result) => {
 //Actualizar
 User.updateById = (id, user, result) => {
   sql.query(
-    "UPDATE Usuario SET usuario = ?, contraseña = ?, tipo = ? , estatus= ? WHERE id = ?",
-    [user.usuario, user.contraseña, user.tipo, user.estatus, id],
+    "UPDATE Usuario SET usuario = ?, contrasena = ?, tipo = ? , estatus= ? WHERE id = ?",
+    [user.usuario, user.contrasena, user.tipo, user.estatus, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

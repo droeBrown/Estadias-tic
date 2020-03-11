@@ -17,7 +17,7 @@ exports.create = (req, res) => {
   // Create a user
   const user = new User({
     usuario: req.body.usuario,
-    contraseña: req.body.contraseña,
+    contrasena: req.body.contrasena,
     tipo: req.body.tipo,
     estatus: req.body.estatus
   });
@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
 
 //Read by user and pass 
 exports.findOne = (req, res) => {
-  User.getOne(req.params.usuario, req.params.contraseña, (err, data) => {
+  User.getOne(req.params.usuario, req.params.contrasena, (err, data) => {
     if (err)
       res.status(500).send({
         message: err.message || "Ha ocurrido un error al consulltar los usuarios."

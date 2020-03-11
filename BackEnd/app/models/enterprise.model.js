@@ -60,7 +60,6 @@ Enterprise.updateById = (id, enterprise, result) => {
         result(null, err);
         return;
       }
-
       if (res.affectedRows == 0) {
         // not found user with the id
         result({
@@ -68,7 +67,6 @@ Enterprise.updateById = (id, enterprise, result) => {
         }, null);
         return;
       }
-
       console.log("updated enterprise: ", {
         id: id,
         ...enterprise

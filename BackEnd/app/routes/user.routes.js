@@ -6,7 +6,7 @@ module.exports = app => {
   //get All users
   app.get("/users", User.findAll);
   //get one user
-  app.get("/user/:usuario/:contraseña", User.findOne);
+  app.get("/user/:usuario/:contrasena", User.findOne);
   //update user
   app.put("/update-user/:id", User.update);
   //delete user

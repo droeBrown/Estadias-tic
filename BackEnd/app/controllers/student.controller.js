@@ -32,7 +32,7 @@ exports.create = (req, res) => {
     id_proyecto: null
   });
 
-  // Save student in the database
+  //Save student in the database
   Student.create(student, (err, data) => {
     if (err)
       res.status(500).send({
