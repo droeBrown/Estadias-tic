@@ -64,6 +64,18 @@ exports.findOne = (req, res) => {
   });
 };
 
+//retrieve student BY matricula
+exports.findByMatricula = (req, res) => {
+  Student.getByMatricula(req.params.matricula, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Ha ocurrido un error al consultar el Alumno."
+      });
+    else res.send(data);
+  });
+};
+
+
 //update student
 exports.update = (req, res) => {
   // Validate Request

@@ -7,6 +7,8 @@ module.exports = app => {
   app.get("/students", Student.findAll);
   //get One student
   app.get("/student/:id", Student.findOne);
+  //get by matricula
+  app.get("/studentByMatricula/:matricula", Student.findByMatricula);
   //update student
   app.put("/update-student/:id", Student.update);
   //delete student

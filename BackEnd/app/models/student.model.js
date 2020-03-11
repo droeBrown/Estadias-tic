@@ -71,6 +71,31 @@ Student.getOne = (id, result) => {
 };
 
 
+//CONSULTAR POR MATRICULA
+Student.getByMatricula = (matricula, result) => {
+  sql.query("SELECT * FROM Alumno WHERE matricula=?", [matricula], (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    if (res != 0) {
+      res = {
+        "Alumno con ID: ": +matricula,
+        "Estado": "Registrado"
+      };
+      result(null, res);
+    } else {
+      res = {
+        "Alumno con ID: ": +matricula,
+        "Estado": "Disponible"
+      };
+      result(null, res);
+    }
+  });
+};
+
+
 //Actualizar
 Student.updateById = (id, student, result) => {
   sql.query(
