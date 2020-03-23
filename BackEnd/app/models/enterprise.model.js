@@ -5,11 +5,19 @@ const sql = require("./db.model.js");
 // constructor
 const Enterprise = function (params) {
   //se crea el modelo de empresa
-  this.nombrecomercial = params.nombrecomercial;
-  this.razonsocial = params.razonsocial;
-  this.numempleados = params.numempleados;
-  this.domicilio = params.domicilio;
+  this.nombre = params.nombre;
+  this.rfc = params.rfc;
   this.giro = params.giro;
+  this.tipo = params.tipo;
+  this.areaAsignada = params.areaAsignada;
+  this.presencia = params.presencia;
+  this.calle = params.calle;
+  this.noInterior = params.noInterior;
+  this.noExterior = params.noExterior;
+  this.colonia = params.colonia;
+  this.cp = params.cp;
+  this.municipio = params.municipio;
+  this.numEmpleados = params.numEmpleados;
   this.calificacion = params.calificacion;
   this.descripcion = params.descripcion;
   this.estatus = params.estatus;
@@ -52,8 +60,8 @@ Enterprise.getAll = result => {
 //Actualizar
 Enterprise.updateById = (id, enterprise, result) => {
   sql.query(
-    "UPDATE Empresa SET nombrecomercial = ?, razonsocial = ?, numempleados = ?, domicilio= ?, giro = ?, calificacion = ?, descripcion = ? , estatus=? WHERE id_empresa = ?",
-    [enterprise.nombrecomercial, enterprise.razonsocial, enterprise.numempleados, enterprise.domicilio, enterprise.giro, enterprise.calificacion, enterprise.descripcion, enterprise.estatus, id],
+    "UPDATE Empresa SET nombre = ?, rfc = ?, giro = ?, tipo= ?, areaAsignada = ?, presencia = ?, calle = ? , noInterior= ?, noExterior=?,colonia=?,cp=?,municipio=?,numEmpleados=?,calificacion=?,descripcion=?,estatus=? WHERE id_empresa = ?",
+    [enterprise.nombre, enterprise.rfc, enterprise.giro, enterprise.tipo, enterprise.areaAsignada, enterprise.presencia, enterprise.calle, enterprise.noInterior, enterprise.noExterior, enterprise.colonia, enterprise.cp, enterprise.municipio, enterprise.numEmpleados, enterprise.calificacion, enterprise.descripcion, enterprise.estatus, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

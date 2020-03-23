@@ -14,11 +14,19 @@ exports.create = (req, res) => {
 
   // Create an enterprise
   const enterprise = new Enterprise({
-    nombrecomercial: req.body.nombrecomercial,
-    razonsocial: req.body.razonsocial,
-    numempleados: req.body.numempleados,
-    domicilio: req.body.domicilio,
+    nombre: req.body.nombre,
+    rfc: req.body.rfc,
     giro: req.body.giro,
+    tipo: req.body.tipo,
+    areaAsignada: req.body.areaAsignada,
+    presencia: req.body.presencia,
+    calle: req.body.calle,
+    noInterior: req.body.noInterior,
+    noExterior: req.body.noExterior,
+    colonia: req.body.colonia,
+    cp: req.body.cp,
+    municipio: req.body.municipio,
+    numEmpleados: req.body.numEmpleados,
     calificacion: req.body.calificacion,
     descripcion: req.body.descripcion,
     estatus: req.body.estatus
